@@ -1,7 +1,7 @@
-NO
-SO
-EA
-WE
+NO textures/north_texture.jpg
+SO textures/south_texture.jpg
+EA textures/east_texture.jpg
+WE textures/west_texture.jpg
 
 C
 F

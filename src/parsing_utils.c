@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:34:02 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/06 14:13:59 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/07 11:39:17 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ bool	is_line_empty(char *line)
 	int i;
 
 	i = 0;
+	if (line[0] == '\n')
+		return true;
 	while (line[i] != '\0')
 	{
 		if (line[i] != ' '

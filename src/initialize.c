@@ -6,13 +6,18 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:30:59 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/06 12:31:49 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/07 11:45:08 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cub3d_init(t_cub *cub3d) 
-{
+// bool	map_init(t_map map, char **line)
+// {
 	
-}
+// }
+
+// void	cub3d_init(t_cub *cub3d) 
+// {
+	
+// }

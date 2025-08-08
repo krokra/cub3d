@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <fcntl.h>
 #include <X11/keysym.h>
 #include "../minilibx-linux/mlx.h"
 #include "../libft/libft.h"
@@ -27,7 +28,13 @@ typedef struct s_cub {
 	void	*win;
 	t_img	img;
 	char	player_pos;
-	t_map	map;
+	t_map	*map;
+	char	*no_texture;
+	char	*so_texture;
+	char	*ea_texture;
+	char	*we_texture;
+	int		floor_rgb;
+	int		ceiling_rgb;
 }				t_cub;
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -35,5 +42,13 @@ bool		is_correct_extension(char *filename, char *ext);
 bool		is_map_line_valid(char *line);
 bool		is_line_empty(char *line);
 bool		is_valid_identifier(char *line);
+bool		is_first_or_last_line_valid(char *line);
+bool		pos_nb_checker(char *map, t_cub *data);
+
+//TEXTURES
+void		north_texture(t_cub *data, char *filename);
+void		south_texture(t_cub *data, char *filename);
+void		west_texture(t_cub *data, char *filename);
+void		east_texture(t_cub *data, char *filename);
 
 #endif

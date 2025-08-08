@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:46:31 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/06 14:32:54 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/07 12:59:27 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ bool is_first_or_last_line_valid(char *line)
 	int i;
 
 	i = 0;
+	if (!line)
+		return false;
 	while (line[i] != '\0')
 	{
-		if (line[i] != '1' || line[i] != ' ')
+		if ((line[i] != '1' && line[i] != ' ' && line[i] != '\n') || is_line_empty(line))
 			return false;
+		i++;
 	}
 	return true;
 }
 
-bool	is_map_valid(char *map)
+bool	pos_nb_checker(char *map, t_cub *data)
 {
 	int i;
 	int pos;
@@ -34,15 +37,19 @@ bool	is_map_valid(char *map)
 	i = 0;
 	while (map[i + 1] != '\0')
 	{
-		if (map[i] != 'N' && map[i] != 'S' && map[i] != 'W' && map[i] != 'E' && map[i] != '0' && map[i] != '1' && map[i] != ' ')
-			return false;
-		if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E')
+		if (map[i] == 'N'
+			|| map[i] == 'S'
+			|| map[i] == 'W'
+			|| map[i] == 'E')
+		{
+			data->player_pos = map[i];
 			pos++;
+		}
 		if (pos > 1)
 			return false;
 		i++;
 	}
-	if (map[i] != 1 || pos != 0)
+	if (pos != 1)
 		return false;
 	return true;
 }

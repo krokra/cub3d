@@ -1,7 +1,7 @@
 NAME		= cub3d
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -g3
 INCLUDES	= -Iincludes -Iminilibx-linux
 
 MLX_DIR		= minilibx-linux
@@ -13,7 +13,8 @@ SRC			=	main.c \
 				parsing_utils.c \
 				my_mlx_pixel_put.c \
 				map_checker.c \
-				initialize.c
+				initialize.c \
+				textures.c
 OBJ_DIR		= obj
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 DEP			= $(OBJ:.o=.d)
