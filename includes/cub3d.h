@@ -19,9 +19,16 @@ typedef struct	s_img {
 	int		endian;
 }				t_img;
 
-typedef struct s_map {
+typedef struct	s_map {
 	char *map;
 }				t_map;
+
+typedef struct	s_rgb {
+	unsigned int R;
+	unsigned int G;
+	unsigned int B;
+}				t_rgb;
+
 
 typedef struct s_cub {
 	void	*mlx;
@@ -33,8 +40,8 @@ typedef struct s_cub {
 	char	*so_texture;
 	char	*ea_texture;
 	char	*we_texture;
-	int		floor_rgb;
-	int		ceiling_rgb;
+	t_rgb	*floor_rgb;
+	t_rgb	*ceiling_rgb;
 }				t_cub;
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -44,11 +51,16 @@ bool		is_line_empty(char *line);
 bool		is_valid_identifier(char *line);
 bool		is_first_or_last_line_valid(char *line);
 bool		pos_nb_checker(char *map, t_cub *data);
+int			end_of_spaces_index(char *line);
 
-//TEXTURES
+// TEXTURES
 void		north_texture(t_cub *data, char *filename);
 void		south_texture(t_cub *data, char *filename);
 void		west_texture(t_cub *data, char *filename);
 void		east_texture(t_cub *data, char *filename);
+
+// CEILING/FLOOR COLORS
+void	ceiling_color(t_cub *data, char *filename);
+void	floor_color(t_cub *data, char *filename);
 
 #endif

@@ -1,10 +1,10 @@
 NO textures/north_texture.jpg
 SO textures/south_texture.jpg
 EA textures/east_texture.jpg
-WE textures/west_texture.jpg
+WE textures/west_qqqqtexture.jpg
 
-C
-F
+C 255,30,0
+F 0,0,255
 
 11111111111              111111111
 10000100001              100000001

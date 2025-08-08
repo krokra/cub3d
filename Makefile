@@ -14,7 +14,8 @@ SRC			=	main.c \
 				my_mlx_pixel_put.c \
 				map_checker.c \
 				initialize.c \
-				textures.c
+				textures.c \
+				cf_colors.c
 OBJ_DIR		= obj
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 DEP			= $(OBJ:.o=.d)

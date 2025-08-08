@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:24:20 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/07 12:59:44 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/08 13:06:53 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
-
 	// SKIP EVERY LINE UNTIL THE FIRST LINE OF THE MAP DESCRIPTION
 	while(!is_first_or_last_line_valid(line))
 		line = get_next_line(fd);
@@ -56,5 +55,7 @@ int main(int argc, char **argv)
 	south_texture(data, argv[1]);
 	east_texture(data, argv[1]);
 	west_texture(data, argv[1]);
+	// floor_color(data, argv[1]);
+	ceiling_color(data, argv[1]);
 	return 0;
 }

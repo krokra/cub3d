@@ -6,11 +6,21 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:34:02 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/07 11:39:17 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/08 11:57:20 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	end_of_spaces_index(char *line)
+{
+	int i;
+
+	i = 0;
+	while ((line[i] == ' ' || line[i] == '\t') && line[i])
+		i++;
+	return (i);
+}
 
 bool	is_correct_extension(char *filename, char *ext)
 {
