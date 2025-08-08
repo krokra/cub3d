@@ -6,64 +6,68 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:27:57 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/08 13:08:28 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/08 22:54:22 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	north_texture(t_cub *data, char *filename)
+void	north_texture(t_cub *data)
 {
-	int		fd;
-	char	*line;
+	char	**line;
+	char	**tab;
+	int		i;
 
-	fd = open(filename, O_RDONLY);
-	line = ft_strdup("");
-	while ((line[0] != 'N' || line[1] != 'O') && line)
-		line = get_next_line(fd);
-	data->no_texture = ft_substr(line, 3, ft_strlen(line) - 4);
-	printf("\nNO TEXTURE PATH : %s", data->no_texture);
-	close(fd);
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strstr(line[i], "NO") && line[i])
+		i++;
+	tab = ft_split(line[i], " \t");
+	data->no_texture = tab[1];
+	//printf("\nNO TEXTURE :%s", data->no_texture);
 }
 
-void	south_texture(t_cub *data, char *filename)
+void	south_texture(t_cub *data)
 {
-	int		fd;
-	char	*line;
+	char	**line;
+	char	**tab;
+	int		i;
 
-	fd = open(filename, O_RDONLY);
-	line = ft_strdup("");
-	while ((line[0] != 'S' || line[1] != 'O') && line)
-		line = get_next_line(fd);
-	data->so_texture = ft_substr(line, 3, ft_strlen(line) - 4);
-	printf("\nSO TEXTURE PATH : %s", data->so_texture);
-	close(fd);
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strstr(line[i], "SO") && line[i])
+		i++;
+	tab = ft_split(line[i], " \t");
+	data->so_texture = tab[1];
+	//printf("\nSO TEXTURE PATH : %s", data->so_texture);
 }
 
-void	east_texture(t_cub *data, char *filename)
+void	east_texture(t_cub *data)
 {
-	int		fd;
-	char	*line;
+	char	**line;
+	char	**tab;
+	int		i;
 
-	fd = open(filename, O_RDONLY);
-	line = ft_strdup("");
-	while ((line[0] != 'E' || line[1] != 'A') && line)
-		line = get_next_line(fd);
-	data->ea_texture = ft_substr(line, 3, ft_strlen(line) - 4);
-	printf("\nEA TEXTURE PATH : %s", data->ea_texture);
-	close(fd);
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strstr(line[i], "EA") && line[i])
+		i++;
+	tab = ft_split(line[i], " \t");
+	data->ea_texture = tab[1];
+	//printf("\nEA TEXTURE PATH : %s", data->ea_texture);
 }
 
-void	west_texture(t_cub *data, char *filename)
+void	west_texture(t_cub *data)
 {
-	int		fd;
-	char	*line;
+	char	**line;
+	char	**tab;
+	int		i;
 
-	fd = open(filename, O_RDONLY);
-	line = ft_strdup("");
-	while ((line[0] != 'W' || line[1] != 'E') && line)
-		line = get_next_line(fd);
-	data->we_texture = ft_substr(line, 3, ft_strlen(line) - 4);
-	printf("\nWE TEXTURE PATH : %s", data->we_texture);
-	close(fd);
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strstr(line[i], "WE") && line[i])
+		i++;
+	tab = ft_split(line[i], " \t");
+	data->we_texture = tab[1];
+	//printf("\nWE TEXTURE PATH : %s", data->we_texture);
 }

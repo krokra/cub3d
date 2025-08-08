@@ -6,53 +6,50 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 11:11:11 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/08 13:06:01 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/08 22:54:15 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ceiling_color(t_cub *data, char *filename)
+void	ceiling_color(t_cub *data)
 {
-	int		fd;
-	char	*line;
+	char	**line;
 	char	**tab;
+	int		i;
 
-	(void)data;
-	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	while (line[end_of_spaces_index(line)] != 'C' && line)
-		line = get_next_line(fd);
-	printf("\nLINE :%s\n", line);
-	tab = ft_split(line, " ,\t");
-	for (int j = 0; j < 4; j++)
-	{
-		printf("TAB %d : %s\n", j, tab[j]);
-	}
-	
-	// while (line[i])
-	// {
-	// 	while (line[i] != ',' && line[i] != '.')
-	// 		i++;
-	// 	if (!data->ceiling_rgb->R)
-	// 		data->ceiling_rgb->R = ft_atoi(ft_substr(line, 2, i));
-	// 	else if (!data->ceiling_rgb->G && )
-	// }
-	// data->ceiling_rgb->R = ft_atoi(tab[1]);
-	// printf("\nCEILING COLOR : %s", data->ceiling_rgb);
-	close(fd);
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strchr(line[i], 'C') && line)
+		i++;
+	tab = ft_split(line[i], " ,\t");
+	data->ceiling_rgb = malloc(sizeof(t_rgb));
+	data->ceiling_rgb->R = ft_atoi(tab[1]);
+	data->ceiling_rgb->G = ft_atoi(tab[2]);
+	data->ceiling_rgb->B = ft_atoi(tab[3]);
+	// DEBUG
+	// printf("\nCEILING RGB :%u,", data->ceiling_rgb->R);
+	// printf("%u,", data->ceiling_rgb->G);
+	// printf("%u\n", data->ceiling_rgb->B);
 }
 
-// void	floor_color(t_cub *data, char *filename)
-// {
-// 	int		fd;
-// 	char	*line;
+void	floor_color(t_cub *data)
+{
+	char	**line;
+	char	**tab;
+	int		i;
 
-// 	fd = open(filename, O_RDONLY);
-// 	line = ft_strdup("");
-// 	while (line[0] != 'F' && line)
-// 		line = get_next_line(fd);
-// 	data->floor_rgb = ft_substr(line, 2, ft_strlen(line) - 3);
-// 	printf("\nFLOOR COLOR : %s", data->floor_rgb);
-// 	close(fd);
-// }
+	i = 0;
+	line = data->map->infos;
+	while (!ft_strchr(line[i], 'F') && line)
+		i++;
+	tab = ft_split(line[i], " ,\t");
+	data->floor_rgb = malloc(sizeof(t_rgb));
+	data->floor_rgb->R = ft_atoi(tab[1]);
+	data->floor_rgb->G = ft_atoi(tab[2]);
+	data->floor_rgb->B = ft_atoi(tab[3]);
+	// DEBUG
+	// printf("\nFLOOR RGB :%u,", data->floor_rgb->R);
+	// printf("%u,", data->floor_rgb->G);
+	// printf("%u\n", data->floor_rgb->B);
+}

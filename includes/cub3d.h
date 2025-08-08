@@ -20,7 +20,8 @@ typedef struct	s_img {
 }				t_img;
 
 typedef struct	s_map {
-	char *map;
+	char	*map;
+	char	**infos;
 }				t_map;
 
 typedef struct	s_rgb {
@@ -52,15 +53,16 @@ bool		is_valid_identifier(char *line);
 bool		is_first_or_last_line_valid(char *line);
 bool		pos_nb_checker(char *map, t_cub *data);
 int			end_of_spaces_index(char *line);
+char		*skip_to_next_line(char *str);
 
 // TEXTURES
-void		north_texture(t_cub *data, char *filename);
-void		south_texture(t_cub *data, char *filename);
-void		west_texture(t_cub *data, char *filename);
-void		east_texture(t_cub *data, char *filename);
+void		north_texture(t_cub *data);
+void		south_texture(t_cub *data);
+void		west_texture(t_cub *data);
+void		east_texture(t_cub *data);
 
 // CEILING/FLOOR COLORS
-void	ceiling_color(t_cub *data, char *filename);
-void	floor_color(t_cub *data, char *filename);
+void	ceiling_color(t_cub *data);
+void	floor_color(t_cub *data);
 
 #endif

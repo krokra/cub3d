@@ -12,6 +12,18 @@
 
 #include "../includes/cub3d.h"
 
+char	*skip_to_next_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strchr(str, '\n'))
+		return NULL;
+	while (str[i] != '\n' && str[i])
+		i++;
+	return (str + i);
+}
+
 int	end_of_spaces_index(char *line)
 {
 	int i;
