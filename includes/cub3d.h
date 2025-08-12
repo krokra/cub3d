@@ -22,6 +22,8 @@ typedef struct	s_img {
 typedef struct	s_map {
 	char	*map;
 	char	**infos;
+	int		height;
+	int		width;
 }				t_map;
 
 typedef struct	s_rgb {
@@ -54,6 +56,8 @@ bool		is_first_or_last_line_valid(char *line);
 bool		pos_nb_checker(char *map, t_cub *data);
 int			end_of_spaces_index(char *line);
 char		*skip_to_next_line(char *str);
+bool	check_walls(t_cub *cub, char **map, int i, int j);
+bool	map_checker(t_cub *data, char **map);
 
 // TEXTURES
 void		north_texture(t_cub *data);

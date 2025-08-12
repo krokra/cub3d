@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:46:31 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/07 12:59:27 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/12 12:21:37 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,50 @@ bool	pos_nb_checker(char *map, t_cub *data)
 	}
 	if (pos != 1)
 		return false;
+	return true;
+}
+bool	check_walls(t_cub *cub, char **map, int i, int j)
+{
+	if (j - 1 >= 0 && j - 1 < cub->map->height)
+	{
+		if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j - 1]))
+			return false;
+		if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j - 1]))
+			return false;
+		if (i >= 0 && i < (int)ft_strlen(map[j - 1]))
+			return false;
+	}
+	if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j]))
+			return false;
+	if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j]))
+			return false;
+	if (j + 1 >= 0 && j + 1 < cub->map->height)
+	{
+		if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j + 1]))
+			return false;
+		if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j + 1]))
+			return false;
+		if (i >= 0 && i < (int)ft_strlen(map[j + 1]))
+			return false;
+	}
+	return true;
+}
+
+bool	map_checker(t_cub *data, char **map)
+{
+	int		i;
+	int		j;
+
+	j = -1;
+	while (++j < data->map->height)
+	{
+		i = -1;
+		while (++i < data->map->width)
+		{
+			if (map[j][i] == ' ')
+				if (!check_walls(data, map, i, j))
+					return false;
+		}
+	}
 	return true;
 }
