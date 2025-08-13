@@ -69,4 +69,8 @@ void		east_texture(t_cub *data);
 void	ceiling_color(t_cub *data);
 void	floor_color(t_cub *data);
 
+// MLX-RELATED FUNCTIONS
+void	initialize_mlx(t_cub *cub);
+void	events_handling(t_cub *cub);
+
 #endif

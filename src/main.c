@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:24:20 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/12 12:23:45 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/13 14:45:12 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	}
 	cub_map->map = line;
 	line = get_next_line(fd);
-	i = 1;
+	i = 0;
 	j = 0;
 	while (!is_first_or_last_line_valid(line))
 	{
@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 		i++;
 	}
 	cub_map->height = i;
+	cub_map->width = j;
 	cub_map->map = ft_strjoin(cub_map->map, line);
 	if (!pos_nb_checker(cub_map->map, data))
 	{
@@ -67,18 +68,22 @@ int main(int argc, char **argv)
 	data->map = cub_map;
 	close(fd);
 	char **tab_test = ft_split(data->map->map, "\n");
-	for (int j = 0; tab_test[j]; j++)
+	for (int k = 0; tab_test[k]; k++)
 	{
-		printf("TAB %d :%s\n", j, tab_test[j]);
+		printf("TAB %d :%s\n", k, tab_test[k]);
 	}
 	
 	if (!map_checker(data, tab_test))
 		printf("INVALID MAP\n");
+	initialize_mlx(data);
 	north_texture(data);
 	south_texture(data);
 	east_texture(data);
 	west_texture(data);
 	floor_color(data);
 	ceiling_color(data);
+	mlx_loop(data->mlx);
+
+
 	return 0;
 }

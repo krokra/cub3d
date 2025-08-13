@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:34:02 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/11 13:24:23 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/13 14:52:03 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ bool	is_correct_extension(char *filename, char *ext)
 
 	j = 0;
 	i = 0;
-	while (filename[i] != '.' && filename[i] != '\0')
-		i++;
+	filename = ft_strrchr(filename, '.');
 	if (filename[i] == '\0' || !filename[i])
 		return false;
 	while (filename[++i] == ext[j] && filename[i] && ext[j])
