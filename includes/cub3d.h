@@ -39,8 +39,8 @@ typedef struct s_ray {
 	int		stepX;
 	int		stepY;
 	int		side;
-	int		wall_distance;
-	int		wall_x;
+	double		wall_distance;
+	double		wall_x;
 	int		draw_start;
 	int		draw_end;
 	int		line_height;

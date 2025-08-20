@@ -6,14 +6,36 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 11:00:27 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/20 15:58:41 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:07:06 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+void	init_ray(t_ray *ray)
+{
+	ray->cameraX = 0;
+	ray->dirX = 0;
+	ray->dirY = 0;
+	ray->mapX = 0;
+	ray->mapY = 0;
+	ray->stepX = 0;
+	ray->stepY = 0;
+	ray->sideDistX = 0;
+	ray->sideDistY = 0;
+	ray->deltaDistX = 0;
+	ray->deltaDistY = 0;
+	ray->wall_distance = 0;
+	ray->wall_x = 0;
+	ray->side = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
+}
+
 void raycast_init(int x, t_player *player, t_ray *ray)
 {
+	init_ray(ray);
     ray->cameraX = 2 * x / (double)WIDTH - 1;
     ray->dirX = player->dirX + player->planeX * ray->cameraX;
     ray->dirY = player->dirY + player->planeY * ray->cameraX;
@@ -64,15 +86,12 @@ void	exec_dda(t_cub *data, t_ray *ray)
             ray->mapY += ray->stepY;
             ray->side = 1;
         }
-        // Use integer boundary checks
         if (ray->mapY < 0 || ray->mapX < 0 ||
             ray->mapY >= data->map->height ||
             ray->mapX >= data->map->width)
         {
-            // Set hit to avoid using uninitialized values
             hit = 1;
-            // Optionally, set a flag to indicate no wall was hit
-            ray->wall_distance = (int)1e30; // Large value to avoid division by zero
+            ray->wall_distance = 1e30;
             break;
         }
         else if (data->map->map_tab[ray->mapY][ray->mapX] == '1')
@@ -113,19 +132,18 @@ void	raycasting(t_cub *data)
         dda_init(ray, data->player);
         exec_dda(data, ray);
         line_height(ray, data->player, data);
-
-        // Choose color based on wall side (simple example)
-        color = (ray->side == 0) ? 0xAAAAAA : 0x555555;
-
-        // Draw vertical line for this column
+		if (ray->side == 0)
+			color = 0x00ff00;
+		else
+			color = 0xff00ff;
         for (y = 0; y < HEIGHT; y++)
         {
             if (y >= ray->draw_start && y <= ray->draw_end)
-                my_mlx_pixel_put(&data->img, x, y, color); // Wall
-            else if (y < ray->draw_start)
-                my_mlx_pixel_put(&data->img, x, y, 0x87CEEB); // Ceiling (sky blue)
-            else
-                my_mlx_pixel_put(&data->img, x, y, 0x222222); // Floor (dark)
+                my_mlx_pixel_put(&data->img, x, y, color);
+			else if (y < ray->draw_start)
+				my_mlx_pixel_put(&data->img, x, y, (data->ceiling_rgb->R << 16) | (data->ceiling_rgb->G << 8) | data->ceiling_rgb->B);
+			else if (y > ray->draw_end)
+				my_mlx_pixel_put(&data->img, x, y, (data->floor_rgb->R << 16) | (data->floor_rgb->G << 8) | data->floor_rgb->B);
         }
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img.data, 0, 0);
