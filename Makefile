@@ -17,7 +17,8 @@ SRC			=	main.c \
 				textures.c \
 				cf_colors.c \
 				init_mlx.c \
-				events_handling.c
+				events_handling.c \
+				raycaster.c
 OBJ_DIR		= obj
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 DEP			= $(OBJ:.o=.d)

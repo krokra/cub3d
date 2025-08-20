@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:46:31 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/20 11:00:12 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:48:28 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	pos_nb_checker(char *map, t_cub *data)
 			|| map[i] == 'W'
 			|| map[i] == 'E')
 		{
-			data->player_dir = map[i];
+			data->player->player_dir = map[i];
 			pos++;
 		}
 		if (pos > 1)
@@ -104,8 +104,8 @@ void	set_player_pos(t_cub *data)
 				|| data->map->map_tab[i][j] == 'W'
 				|| data->map->map_tab[i][j] == 'E')
 			{
-				data->pos_X = j;
-				data->pos_Y = i;
+				data->player->pos_X = j;
+				data->player->pos_Y = i;
 				return ;
 			}
 			j++;

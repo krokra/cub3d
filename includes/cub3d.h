@@ -40,8 +40,10 @@ typedef struct s_ray {
 	int		stepY;
 	int		side;
 	int		wall_distance;
+	int		wall_x;
 	int		draw_start;
 	int		draw_end;
+	int		line_height;
 }				t_ray;
 
 typedef struct	s_img {
@@ -80,6 +82,8 @@ typedef struct s_cub {
 	t_rgb	*ceiling_rgb;
 	t_player	*player;
 	t_ray		*ray;
+	int			w_height;
+	int			w_width;
 }				t_cub;
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -94,7 +98,7 @@ char		*skip_to_next_line(char *str);
 bool		check_walls(t_cub *cub, char **map, int i, int j);
 bool		map_checker(t_cub *data, char **map);
 void		set_player_pos(t_cub *data);
-
+void		raycasting(t_cub *data);
 // TEXTURES
 void		north_texture(t_cub *data);
 void		south_texture(t_cub *data);
