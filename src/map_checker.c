@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:46:31 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/13 12:21:16 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:00:12 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	pos_nb_checker(char *map, t_cub *data)
 			|| map[i] == 'W'
 			|| map[i] == 'E')
 		{
-			data->player_pos = map[i];
+			data->player_dir = map[i];
 			pos++;
 		}
 		if (pos > 1)
@@ -58,26 +58,60 @@ bool	check_walls(t_cub *cub, char **map, int i, int j)
 	if (j - 1 >= 0 && j - 1 < cub->map->height)
 	{
 		if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j - 1]))
-			return false;
+			if (map[j - 1][i - 1] == '0')
+				return false;
 		if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j - 1]))
-			return false;
+			if (map[j - 1][i + 1] == '0')
+				return false;
 		if (i >= 0 && i < (int)ft_strlen(map[j - 1]))
-			return false;
+			if (map[j - 1][i] == '0')
+				return false;
 	}
 	if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j]))
+		if (map[j][i - 1] == '0')
 			return false;
 	if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j]))
+		if (map[j][i + 1] == '0')
 			return false;
 	if (j + 1 >= 0 && j + 1 < cub->map->height)
 	{
 		if (i - 1 >= 0 && i - 1 < (int)ft_strlen(map[j + 1]))
-			return false;
+			if (map[j + 1][i - 1] == '0')
+				return false;
 		if (i + 1 >= 0 && i + 1 < (int)ft_strlen(map[j + 1]))
-			return false;
+			if (map[j + 1][i + 1] == '0')
+				return false;
 		if (i >= 0 && i < (int)ft_strlen(map[j + 1]))
-			return false;
+			if (map[j + 1][i] == '0')
+				return false;
 	}
 	return true;
+}
+
+void	set_player_pos(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map->map_tab[i])
+	{
+		j = 0;
+		while (data->map->map_tab[i][j] != '\0')
+		{
+			if (data->map->map_tab[i][j] == 'N'
+				|| data->map->map_tab[i][j] == 'S'
+				|| data->map->map_tab[i][j] == 'W'
+				|| data->map->map_tab[i][j] == 'E')
+			{
+				data->pos_X = j;
+				data->pos_Y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 bool	map_checker(t_cub *data, char **map)

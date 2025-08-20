@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:24:20 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/13 14:45:12 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:00:21 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ int main(int argc, char **argv)
 	}
 	data->map = cub_map;
 	close(fd);
-	char **tab_test = ft_split(data->map->map, "\n");
-	for (int k = 0; tab_test[k]; k++)
+	char **tmap = ft_split(data->map->map, "\n");
+	data->map->map_tab = tmap;
+	set_player_pos(data);
+	for (int k = 0; tmap[k]; k++)
 	{
-		printf("TAB %d :%s\n", k, tab_test[k]);
+		printf("TAB %d :%s\n", k, tmap[k]);
 	}
-	
-	if (!map_checker(data, tab_test))
-		printf("INVALID MAP\n");
+	printf("X:%d\nY:%d\n", data->pos_X, data->pos_Y);
+	if (!map_checker(data, tmap))
+		return printf("INVALID MAP\n");
 	initialize_mlx(data);
 	north_texture(data);
 	south_texture(data);
