@@ -13,13 +13,15 @@
 #define WIDTH 800
 #define HEIGHT 800
 
+#define MOVESPEED 1
+#define ROTATIONSPEED 0.2
 typedef struct s_player {
 	double dirX;
 	double dirY;
 	double planeY;
 	double planeX;
-	int		pos_X;
-	int		pos_Y;
+	double		pos_X;
+	double		pos_Y;
 	char	player_dir;
 
 }				t_player;
@@ -98,7 +100,10 @@ char		*skip_to_next_line(char *str);
 bool		check_walls(t_cub *cub, char **map, int i, int j);
 bool		map_checker(t_cub *data, char **map);
 void		set_player_pos(t_cub *data);
-void		raycasting(t_cub *data);
+int			raycasting(t_cub *data);
+void		data_init(t_cub *data);
+void		player_init(t_cub *data);
+void		arg_check(t_cub *data, int argc, char **argv);
 // TEXTURES
 void		north_texture(t_cub *data);
 void		south_texture(t_cub *data);
@@ -108,9 +113,16 @@ void		east_texture(t_cub *data);
 // CEILING/FLOOR COLORS
 void	ceiling_color(t_cub *data);
 void	floor_color(t_cub *data);
+void	textures_and_colors_init(t_cub *data);
 
 // MLX-RELATED FUNCTIONS
 void	initialize_mlx(t_cub *cub);
 void	events_handling(t_cub *cub);
+int		key_hook(int keysym, t_cub *cub);
 
+//PLAYER MOVEMENT
+void	move_forward(t_cub *cub);
+void	move_backward(t_cub *cub);
+void	move_left(t_cub *cub);
+void	move_right(t_cub *cub);
 #endif

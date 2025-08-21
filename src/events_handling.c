@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:17:00 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/20 16:40:32 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:31:20 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@ static int	ft_close_window(t_cub *cub)
 	exit(EXIT_SUCCESS);
 }
 
-static int	key_hook(int keysym, t_cub *cub)
+int	key_hook(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
 		ft_close_window(cub);
-	else if (keysym == XK_Z)
-	{
-		if(cub->map->map_tab[(int)(cub->player->pos_X + cub->player->dirX * 2)][(int)cub->player->pos_Y] == false) cub->player->pos_X += cub->player->dirX * 2;
-		if(cub->map->map_tab[(int)(cub->player->pos_X)][(int)(cub->player->pos_Y + cub->player->dirY * 2)] == false) cub->player->pos_X += cub->player->dirX * 2;
-	}
+	if (keysym == XK_Z || keysym == XK_Up)
+		move_forward(cub);
+	else if (keysym == XK_S || keysym == XK_Down)
+		move_backward(cub);
+	else if (keysym == XK_Q || keysym == XK_Left)
+		move_left(cub);
+	else if (keysym == XK_D || keysym == XK_Right)
+		move_right(cub);
+	raycasting(cub);
 	return (0);
 }
 

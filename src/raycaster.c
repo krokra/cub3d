@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 11:00:27 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/20 17:07:06 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/21 11:51:52 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,32 +119,31 @@ void	line_height(t_ray *ray, t_player *player, t_cub *data)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	raycasting(t_cub *data)
+int	raycasting(t_cub *data)
 {
-    t_ray	*ray = malloc(sizeof(t_ray));
     int		x, y;
     int		color;
 
-	data->ray = ray;
     for (x = 0; x < WIDTH; x++)
     {
-        raycast_init(x, data->player, ray);
-        dda_init(ray, data->player);
-        exec_dda(data, ray);
-        line_height(ray, data->player, data);
-		if (ray->side == 0)
+        raycast_init(x, data->player, data->ray);
+        dda_init(data->ray, data->player);
+        exec_dda(data, data->ray);
+        line_height(data->ray, data->player, data);
+		if (data->ray->side == 0)
 			color = 0x00ff00;
 		else
 			color = 0xff00ff;
         for (y = 0; y < HEIGHT; y++)
         {
-            if (y >= ray->draw_start && y <= ray->draw_end)
+            if (y >= data->ray->draw_start && y <= data->ray->draw_end)
                 my_mlx_pixel_put(&data->img, x, y, color);
-			else if (y < ray->draw_start)
+			else if (y < data->ray->draw_start)
 				my_mlx_pixel_put(&data->img, x, y, (data->ceiling_rgb->R << 16) | (data->ceiling_rgb->G << 8) | data->ceiling_rgb->B);
-			else if (y > ray->draw_end)
+			else if (y > data->ray->draw_end)
 				my_mlx_pixel_put(&data->img, x, y, (data->floor_rgb->R << 16) | (data->floor_rgb->G << 8) | data->floor_rgb->B);
         }
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img.data, 0, 0);
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: psirault <psirault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:02:34 by psirault          #+#    #+#             */
-/*   Updated: 2025/08/13 12:18:28 by psirault         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:08:46 by psirault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ void	initialize_mlx(t_cub *cub)
 		 &cub->img.bits_per_pixel,
 		 &cub->img.line_length,
 		 &cub->img.endian);
-	events_handling(cub);
 }
